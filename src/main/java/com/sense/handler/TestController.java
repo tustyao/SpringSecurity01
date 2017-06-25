@@ -14,6 +14,11 @@ public class TestController {
         System.out.println("TestController.user");
         return "index";
     }
+    @GetMapping("/admin")
+    public String admin(){
+        System.out.println("TestController.admin");
+        return "admin";
+    }
 
     @GetMapping("/sys/login")
     public String login(){

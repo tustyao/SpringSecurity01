@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import javax.sql.DataSource;
 
@@ -22,8 +23,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //基于jdbc
-        auth.jdbcAuthentication().dataSource(dataSource);
-                //authoritiesByUsernameQuery("select * from t_user where username='tustyao'");
+        JdbcUserDetailsManager userDetailsService = auth.jdbcAuthentication().dataSource(dataSource).getUserDetailsService();
+        userDetailsService.setUsersByUsernameQuery("SELECT `username`,`password`,`status` from t_user where username =? and status = 1");
+        userDetailsService.setAuthoritiesByUsernameQuery("SELECT `username`,`auth` from t_authorities where `endtime` > now() and username = ?");
+        userDetailsService.setRolePrefix("ROLE_");
+        //authoritiesByUsernameQuery("select * from t_user where username='tustyao'");
         //基于内存
         //  auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
         //   auth.inMemoryAuthentication().withUser("admin").password("password").roles("USER", "ADMIN");
