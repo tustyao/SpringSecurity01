@@ -10,9 +10,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  * Created by 要 on 2017/6/18.
  */
 @EnableWebMvc
-@EnableWebSecurity
 @Configuration
-@ComponentScan(basePackages = {"com.sense"})
+@ComponentScan(basePackages = {"com.sense.handler"})
 /**
  * 继承{@link WebMvcConfigurerAdapter} +@EnableWebMvc
  * 优先级大于

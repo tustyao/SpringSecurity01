@@ -14,7 +14,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
      * @return
      */
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[]{SpringContextConfig.class,WebSecurityConfig.class};
     }
 
     /**
@@ -33,7 +33,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
      * 02,路径匹配 /* /a/b/*
      * 03,精确匹配 /a/b/c.html
      * 04，缺省匹配 /
-     * 精确匹配 > 路径匹配 > 扩展名匹配 > 缺省皮撇
+     * 精确匹配 > 路径匹配 > 扩展名匹配 > 缺省匹配
      * <p>
      * 注：扩展名和路径匹配不能同时设置 如/usr/*.jsp
      * <p>

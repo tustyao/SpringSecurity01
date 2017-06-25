@@ -20,5 +20,10 @@ public class TestController {
         System.out.println("TestController.login");
         return "login";
     }
+    @PostMapping("/sys/logout")
+    public String loginout(){
+        System.out.println("TestController.logout");
+        return "logout";
+    }
 
 }
